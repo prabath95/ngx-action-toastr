@@ -16,7 +16,7 @@ $m-danger-color: #af4c4c;
 $m-danger-color-light: #fff;
 $m-danger-color-dark: #461313;
 
-.toast-portal {
+.toast-portal-container {
   font-family: 'Lato', sans-serif;
   position: fixed;
   z-index: 9999;
@@ -26,6 +26,7 @@ $m-danger-color-dark: #461313;
     background: #333;
     padding: 10px;
     border-radius: 15px;
+    position: relative;
     .m-toast__content {
       display: flex;
       gap: 15px;
@@ -90,6 +91,9 @@ $m-danger-color-dark: #461313;
       display: block;
       margin-top: 5px;
     }
+  }
+  .m-toast:not(:first-child) {
+    margin-top: 10px;
   }
   
   .m-toast--success {
@@ -164,14 +168,24 @@ $m-danger-color-dark: #461313;
   }
 }
 
-.toast-portal--right {
+.toast-portal-container--right {
   right: 10px;
   top: 10px;
 }
 
-.toast-portal--left {
+.toast-portal-container--left {
   left: 10px;
   top: 10px;
+}
+
+.toast-portal-container--left-bottom {
+  left: 10px;
+  bottom: 10px;
+}
+
+.toast-portal-container--right-bottom {
+  right: 10px;
+  bottom: 10px;
 }
 
 .ml-5 {
