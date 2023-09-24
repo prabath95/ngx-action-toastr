@@ -102,6 +102,40 @@
           }
         }
       }
+    },
+    "ngx-action-toastr": {
+      "projectType": "library",
+      "root": "projects/ngx-action-toastr",
+      "sourceRoot": "projects/ngx-action-toastr/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-action-toastr/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-action-toastr/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-action-toastr/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-action-toastr/src/test.ts",
+            "tsConfig": "projects/ngx-action-toastr/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-action-toastr/karma.conf.js"
+          }
+        }
+      }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

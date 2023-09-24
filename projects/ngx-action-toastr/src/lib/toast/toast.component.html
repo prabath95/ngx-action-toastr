@@ -1,0 +1,64 @@
+<div class="toast-portal">
+  <div class="m-toast m-toast--success toast is-visible" [ngClass]="{
+            'm-toast--success': toast.toastType === 'SUCCESS',
+            'm-toast--error': toast.toastType === 'ERROR',
+            'm-toast--info': toast.toastType === 'INFO',
+            'm-toast--warning': toast.toastType === 'WARNING',
+            'is-expanded': toast.isExpanded
+        }">
+    <div class="m-toast__content">
+      <svg class="a-icon m-toast__icon"
+        [attr.viewBox]="'0 0 '+ svgIcons.faCheck.icon[0] + ' '+ svgIcons.faCheck.icon[1] "
+        *ngIf="toast.toastType === 'SUCCESS'">
+        <path [attr.d]="svgIcons.faCheck.icon[4]"></path>
+      </svg>
+      <svg class="a-icon m-toast__icon"
+        [attr.viewBox]="'0 0 '+ svgIcons.faExclamation.icon[0] + ' '+ svgIcons.faExclamation.icon[1] "
+        *ngIf="toast.toastType === 'ERROR'">
+        <path [attr.d]="svgIcons.faExclamation.icon[4]"></path>
+      </svg>
+      <svg class="a-icon m-toast__icon"
+        [attr.viewBox]="'0 0 '+ svgIcons.faExclamationTriangle.icon[0] + ' '+ svgIcons.faExclamationTriangle.icon[1] "
+        *ngIf="toast.toastType === 'WARNING'">
+        <path [attr.d]="svgIcons.faExclamationTriangle.icon[4]"></path>
+      </svg>
+      <svg class="a-icon m-toast__icon"
+        [attr.viewBox]="'0 0 '+ svgIcons.faInfo.icon[0] + ' '+ svgIcons.faInfo.icon[1] "
+        *ngIf="toast.toastType === 'INFO'">
+        <path [attr.d]="svgIcons.faInfo.icon[4]"></path>
+      </svg>
+      <div class="m-toast__content-body">
+        <span class="m-toast__title">
+          <span class="ts-bold" *ngIf="toast.messageBoldFront">{{toast.messageBoldFront}}</span>
+          {{toast.message}}
+          <span class="ts-bold" *ngIf="toast.messageBoldEnd">{{toast.messageBoldEnd}}</span>
+        </span>
+        <span class="m-toast__text" *ngIf="toast.isExpanded">{{toast.longMessage}}</span>
+      </div>
+      <ng-container *ngFor="let button of toast.buttons">
+        <button class="a-link-btn a-link-btn--secondary m-toast__link-btn" *ngIf="button.buttonPosition === 'LEFT'"
+          (click)="buttonClicked(toast,button)">
+          {{button.text}}
+        </button>
+      </ng-container>
+    </div>
+    <div class="m-toast__action t-tiny-pack">
+      <ng-container *ngFor="let button of toast.buttons">
+        <button class="a-link-btn a-link-btn--primary m-toast__link-btn" *ngIf="button.buttonPosition === 'RIGHT'"
+          (click)="buttonClicked(toast,button)">
+          {{button.text}}
+        </button>
+      </ng-container>
+      <button class="a-link-btn a-link-btn--primary m-toast__link-btn" *ngIf="!toast.isExpanded && toast.longMessage"
+        (click)="toast.isExpanded = !toast.isExpanded">
+        View More
+      </button>
+    </div>
+    <button class="a-link-btn m-toast__close-btn" *ngIf="toast.closeButtonActive" (click)="closeAction()">
+      <svg class="a-icon" [attr.viewBox]="'0 0 '+ svgIcons.faXmark.icon[0] + ' '+ svgIcons.faXmark.icon[1] ">
+        <path [attr.d]="svgIcons.faXmark.icon[4]"></path>
+      </svg>
+    </button>
+  </div>
+
+</div>
