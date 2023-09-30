@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Toast } from '../models/Toast';
 import { Button } from '../models/Button';
 import * as icons from '@fortawesome/free-solid-svg-icons';
+import { ToastService } from '../services/toast.service';
+import { ToastPosition, ToastTypes } from '../models/SimpleToast';
 
 @Component({
   selector: 'lib-toast',
@@ -9,51 +11,48 @@ import * as icons from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./toast.component.scss'],
 })
 export class ToastComponent implements OnInit {
-  @Input()
-  toast!: Toast;
-
   @Output()
-  close: EventEmitter<Toast> = new EventEmitter<Toast>();
-
-  @Output()
-  timeOut: EventEmitter<Toast> = new EventEmitter<Toast>();
-
-  @Output()
-  buttonClick: EventEmitter<Toast> = new EventEmitter<Toast>();
+  close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   svgIcons = icons;
+  toastPosition: ToastPosition = ToastPosition.RIGHT_TOP;
+  toastPositions = ToastPosition;
+  toastTypes = ToastTypes;
 
-  constructor() {}
+  constructor(public toastService: ToastService) {}
 
-  ngOnInit(): void {
-    if(this.toast?.timeToDisplay){
-    this.setTimeOutForAutoDisappear();
+  ngOnInit(): void {}
+
+  /**
+   * create a timer to auto disappear the toast
+   * @param toast toast object
+   * @param index item index of the toast
+   */
+  setTimeOutForAutoDisappear(toast: Toast, index: number) {
+    setTimeout(() => {
+      this.cancel(index);
+    }, toast.timeToDisplay);
+  }
+
+  /**
+   * remove the item from the toast
+   * @param index item index of the toast to remove
+   */
+  cancel(index: number) {
+    const removed = this.toastService.toasts.splice(index, 1);
+    if (this.toastService.toasts.length <= 0) {
+      this.close.emit(true);
     }
   }
 
   /**
-   * create a timer to auto disappear the toast
-   */
-  setTimeOutForAutoDisappear() {
-    setTimeout(() => {
-      this.cancel();
-    }, this.toast.timeToDisplay);
-  }
-
-  /**
    * remove the item from the toast
    * @param index item index of the toast to remove
    */
-  cancel() {
-    this.timeOut.emit(this.toast);
-  }
-
-  /**
-   * remove the item from the toast
-   * @param index item index of the toast to remove
-   */
-  closeAction() {
-    this.close.emit(this.toast);
+  closeAction(index: number) {
+    const toast = this.toastService.toasts[index];
+    toast.subject?.next(toast);
+    this.cancel(index);
   }
 
   /**
@@ -63,6 +62,6 @@ export class ToastComponent implements OnInit {
    */
   buttonClicked(toast: Toast, button: Button) {
     toast.clickedButton = button;
-    this.buttonClick.emit(toast);
+    toast.subject?.next(toast);
   }
 }

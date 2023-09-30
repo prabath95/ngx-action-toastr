@@ -63,60 +63,58 @@
 
 </div> -->
 
-<div class="toast-portal-container toast-portal-container--right">
-  <div class="m-toast m-toast--success">
+<div class="toast-portal-container"
+  [ngClass]="{'toast-portal-container--right':toastPosition === toastPositions.RIGHT_TOP}">
+  <div class="m-toast" *ngFor="let toast of toastService.toasts; let i = index"
+    [ngClass]="{'m-toast--success':toast.toastType === toastTypes.SUCCESS}">
     <div class="m-toast__content">
       <div class="m-toast__icon-outer">
         <div class="m-toast__icon">
-          <svg class="a-icon" viewBox="0 0 512 512">
-            <path
-              d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
-            ></path>
+          <svg class="a-icon" viewBox="0 0 512 512" *ngIf="toast.toastType === 'SUCCESS'">
+            <path [attr.d]="svgIcons.faCheck.icon[4]"></path>
           </svg>
         </div>
       </div>
       <div class="m-toast__outer-body">
         <div class="m-toast__body-left">
-          <div class="m-toast-title__head">Test Head Title</div>
-          <div class="m-toast-title__sub">Test Sub Title</div>
-          <div class="m-toast-paragraph">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis
-            ex massa, in eleifend neque vulputate non.
-            <button class="m-toast__btn m-toast__btn-link m-toast__view-more">
-              View More
-            </button>
+          <div class="m-toast-title__head">{{toast.message}}</div>
+          <div class="m-toast-paragraph" *ngIf="toast.longMessage">
+            {{toast.longMessage}}
+            <ng-container *ngFor="let button of toast.buttons">
+              <button class="m-toast__btn m-toast__btn-link m-toast__view-more" (click)="buttonClicked(toast,button)"
+                *ngIf="button.buttonPosition === 'RIGHT'">
+                {{button.text}}
+              </button>
+            </ng-container>
           </div>
         </div>
         <div class="m-toast__body-right">
-          <button class="m-toast__btn m-toast__close-btn">
+          <button class="m-toast__btn m-toast__close-btn" (click)="closeAction(i)">
             <svg class="a-icon" viewBox="0 0 384 512">
-              <path
-                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
-              ></path>
+              <path [attr.d]="svgIcons.faXmark.icon[4]"></path>
             </svg>
           </button>
         </div>
       </div>
     </div>
-    <div class="m-toast__outer-footer">
-      <button class="m-toast__btn m-toast__btn-main m-toast__btn--primary mr-5">
-        Accept
-      </button>
-      <button class="m-toast__btn m-toast__btn-main m-toast__btn--primary">
-        Reject
+    <div class="m-toast__outer-footer" *ngFor="let button of toast?.buttons">
+      <button class="m-toast__btn m-toast__btn-main m-toast__btn--primary mr-5" (click)="buttonClicked(toast,button)"
+        *ngIf="button.buttonPosition === 'RIGHT'">
+        {{button.text}}
       </button>
     </div>
   </div>
 
-  <div class="m-toast m-toast--danger">
+  <!-- <div class="m-toast m-toast--danger">
     <div class="m-toast__content">
       <div class="m-toast__icon-outer">
         <div class="m-toast__icon">
-          <svg class="a-icon" viewBox="0 0 512 512">
-            <path
-              d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
-            ></path>
+
+
+          <svg class="a-icon" viewBox="0 0 384 512" *ngIf="toast.toastType === 'SUCCESS'">
+            <path [attr.d]="svgIcons.faCheck.icon[4]"></path>
           </svg>
+
         </div>
       </div>
       <div class="m-toast__outer-body">
@@ -135,8 +133,8 @@
           <button class="m-toast__btn m-toast__close-btn">
             <svg class="a-icon" viewBox="0 0 384 512">
               <path
-                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
-              ></path>
+                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+              </path>
             </svg>
           </button>
         </div>
@@ -150,5 +148,5 @@
         Reject
       </button>
     </div>
-  </div>
+  </div> -->
 </div>

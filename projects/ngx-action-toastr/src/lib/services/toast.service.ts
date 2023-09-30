@@ -5,58 +5,51 @@ import {
   Injectable,
   createComponent,
 } from '@angular/core';
-import { Toast, ToastTypes } from '../models/Toast';
+import { Toast } from '../models/Toast';
 import { ToastComponent } from '../toast/toast.component';
 import { Observable, Subject } from 'rxjs';
+import { SimpleToast } from '../models/SimpleToast';
+import { ActionToast } from '../models/ActionToast';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
+  private toastComponent!: ComponentRef<ToastComponent>;
+  toasts: Array<Toast> = [];
   constructor(
     private appRef: ApplicationRef,
     private injector: EnvironmentInjector
   ) {}
 
-  public createSimpleToast(
-    message: string,
-    toastType: ToastTypes,
-    toastTimeOut?: number
-  ) {
-    const toast = new Toast(message, toastType, toastTimeOut);
-    const toastComponent = createComponent(ToastComponent, {
-      environmentInjector: this.injector,
-    });
-    toastComponent.instance.toast = toast;
-    toastComponent.instance.timeOut.subscribe(() =>
-      this.destroy(toastComponent)
-    );
-    document.body.appendChild(toastComponent.location.nativeElement);
-    this.appRef.attachView(toastComponent.hostView);
+  private createOrCatchToastContainerElement() {
+    if (!this.toastComponent) {
+      this.toastComponent = createComponent(ToastComponent, {
+        environmentInjector: this.injector,
+      });
+      this.toastComponent.instance.close.subscribe(() =>
+        this.destroy(this.toastComponent)
+      );
+      document.body.appendChild(this.toastComponent.location.nativeElement);
+      this.appRef.attachView(this.toastComponent.hostView);
+    }
   }
 
-  public createCustomToast(toast: Toast): Observable<Toast> {
-    const subject = new Subject<Toast>();
-    const toastComponent = createComponent(ToastComponent, {
-      environmentInjector: this.injector,
-    });
-    toastComponent.instance.toast = toast;
-    toastComponent.changeDetectorRef.detectChanges();
-    toastComponent.instance.timeOut.subscribe(() =>
-      this.destroy(toastComponent)
+  public createSimpleToast(simpleToast: SimpleToast) {
+    this.createOrCatchToastContainerElement();
+
+    this.toasts.push(simpleToast);
+    this.toastComponent.instance.close.subscribe(() =>
+      this.destroy(this.toastComponent)
     );
-    if (toast.buttons && toast.buttons.length > 0) {
-      toastComponent.instance.buttonClick.subscribe((toastData) =>
-        this.buttonClicked(toastData, toastComponent, subject)
-      );
-    }
-    if (toast.closeButtonActive) {
-      toastComponent.instance.close.subscribe((toastData) =>
-        this.closeToast(toastData, toastComponent, subject)
-      );
-    }
-    document.body.appendChild(toastComponent.location.nativeElement);
-    this.appRef.attachView(toastComponent.hostView);
+  }
+
+  public createCustomToast(actionToast: ActionToast): Observable<Toast> {
+    this.createOrCatchToastContainerElement();
+    const subject = new Subject<Toast>();
+    const toast: Toast = actionToast;
+    this.toasts.push(toast);
+    toast.subject = subject;
     return subject.asObservable();
   }
 
@@ -64,21 +57,4 @@ export class ToastService {
     toastComponent.destroy();
   }
 
-  private closeToast(
-    toast: Toast,
-    toastComponent: ComponentRef<ToastComponent>,
-    subject: Subject<Toast>
-  ) {
-    subject.next(toast);
-    toastComponent.destroy();
-  }
-
-  private buttonClicked(
-    toast: Toast,
-    toastComponent: ComponentRef<ToastComponent>,
-    subject: Subject<Toast>
-  ) {
-    subject.next(toast);
-    toastComponent.destroy();
-  }
 }
