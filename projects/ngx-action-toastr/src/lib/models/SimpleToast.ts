@@ -1,6 +1,13 @@
 export enum ToastTypes {
   SUCCESS = 'SUCCESS',
-  ERROR = 'ERROR',
+  DANGER = 'DANGER',
+  WARNING = 'WARNING',
+  INFO = 'INFO',
+}
+
+export enum ButtonTypes {
+  SUCCESS = 'SUCCESS',
+  DANGER = 'DANGER',
   WARNING = 'WARNING',
   INFO = 'INFO',
 }
@@ -17,9 +24,11 @@ export class SimpleToast {
   messageBoldFront?: string;
   messageBoldEnd?: string;
   message: string;
+  isTapToClose?: boolean;
   closeButtonActive?: boolean;
   toastType: ToastTypes;
   toastData?: any;
+  icon: any;
   // in milliseconds
   timeToDisplay?: number;
   longMessage?: string;

@@ -77,7 +77,7 @@ $m-danger-color-dark: #461313;
     .m-toast__close-btn {
       width: 28px;
       height: 28px;
-      line-height: 28px;
+      line-height: 3px;
       background: none;
       box-shadow: none;
       border: none;
@@ -136,9 +136,21 @@ $m-danger-color-dark: #461313;
         fill: $m-warning-color-dark;
       }
     }
-    .m-toast__btn--primary {
+    .m-toast__btn--success {
       background: $m-warning-color-dark;
       color: #fff;
+    }
+    .m-toast__btn--info {
+      background: $m-warning-color-dark;
+      color: #afbbff;
+    }
+    .m-toast__btn--warning {
+      background: $m-warning-color-dark;
+      color: #f5ff9f;
+    }
+    .m-toast__btn--danger {
+      background: $m-warning-color-dark;
+      color: #fea0a0;
     }
   }
   .m-toast--danger {

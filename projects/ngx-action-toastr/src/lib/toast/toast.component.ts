@@ -3,7 +3,7 @@ import { Toast } from '../models/Toast';
 import { Button } from '../models/Button';
 import * as icons from '@fortawesome/free-solid-svg-icons';
 import { ToastService } from '../services/toast.service';
-import { ToastPosition, ToastTypes } from '../models/SimpleToast';
+import { ToastPosition, ToastTypes, ButtonTypes } from '../models/SimpleToast';
 
 @Component({
   selector: 'lib-toast',
@@ -18,6 +18,7 @@ export class ToastComponent implements OnInit {
   toastPosition: ToastPosition = ToastPosition.RIGHT_TOP;
   toastPositions = ToastPosition;
   toastTypes = ToastTypes;
+  buttonTypes = ButtonTypes;
 
   constructor(public toastService: ToastService) {}
 
@@ -53,6 +54,17 @@ export class ToastComponent implements OnInit {
     const toast = this.toastService.toasts[index];
     toast.subject?.next(toast);
     this.cancel(index);
+  }
+
+  /**
+   * close toast on click
+   * @param toast  toast to close
+   * @param index  index of the toast
+   */
+  tapToDismiss(toast: Toast, index: number) {
+    if (toast.isTapToClose) {
+      this.closeAction(index);
+    }
   }
 
   /**
