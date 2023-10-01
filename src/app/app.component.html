@@ -1,0 +1,192 @@
+<header class="header mt-5 text-center">
+    <h1>Angular Action Toast</h1>
+    <p style="color: #777" class="mb-1">Simple easy angular toastr.</p>
+</header>
+
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group mb-3">
+                                <label for="toastTitle">
+                                    <strong>Title</strong>
+                                </label>
+                                <input [(ngModel)]="options.message" type="text" class="form-control" name="toastTitle"
+                                    id="toastTitle" placeholder="Toast title" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="toastMessage">
+                                    <strong>Long Message</strong>
+                                </label>
+                                <textarea [(ngModel)]="options.longMessage" rows="3" class="form-control"
+                                    name="toastMessage" id="toastMessage" placeholder="Toast message"></textarea>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="tapToDismiss"
+                                        [(ngModel)]="options.isTapToClose" />
+                                    <label class="form-check-label" for="tapToDismiss"> Tap to dismiss </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="closeButton"
+                                        [(ngModel)]="options.closeButtonActive" />
+                                    <label class="form-check-label" for="closeButton"> Close button </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="form-group mb-3">
+                                <label for="toastTimeout">
+                                    <strong>Timeout(milliseconds)</strong>
+                                </label>
+                                <input type="text" class="form-control" id="toastTimeout"
+                                    [(ngModel)]="options.timeToDisplay" aria-describedby="toastTimeoutHelp" />
+                                <small id="toastTimeoutHelp" class="form-text text-muted">0 never expires</small>
+                            </div>
+
+
+                            <label for="toastTitle" *ngIf="buttons.length > 0">
+                                <strong>Selected Buttons</strong>
+                            </label>
+                            <div class="input-group mb-3" *ngFor="let button of buttons; let i = index">
+                                <input type="text" class="form-control" [value]="button.text" disabled>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-danger" type="button"
+                                        (click)="removeButton(i)">Remove</button>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="toastTitle">
+                                    <strong>Set Buttons</strong>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Name"
+                                        [(ngModel)]="buttonOptions.text">
+                                    <select class="custom-select" id="inputGroupSelect01"
+                                        [(ngModel)]="buttonOptions.buttonType">
+                                        <option selected>Choose...</option>
+                                        <option [value]="buttonTypes.SUCCESS">SUCCESS</option>
+                                        <option [value]="buttonTypes.INFO">INFO</option>
+                                        <option [value]="buttonTypes.WARNING">WARNING</option>
+                                        <option [value]="buttonTypes.DANGER">DANGER</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            (click)="addButtons()">Button</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-6 col-md-12">
+                                    <fieldset class="form-group mb-3">
+                                        <label>
+                                            <strong>Toast Type</strong>
+                                        </label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="typeRadios"
+                                                [(ngModel)]="options.toastType" [value]="toastTypes.SUCCESS"
+                                                id="typesuccess" />
+                                            <label class="form-check-label" for="typesuccess"> Success </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="typeRadios"
+                                                [(ngModel)]="options.toastType" [value]="toastTypes.INFO"
+                                                id="typeinfo" />
+                                            <label class="form-check-label" for="typeinfo"> Info </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="typeRadios"
+                                                [(ngModel)]="options.toastType" [value]="toastTypes.WARNING"
+                                                id="typewarning" />
+                                            <label class="form-check-label" for="typewarning"> Warning </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="typeRadios"
+                                                [(ngModel)]="options.toastType" [value]="toastTypes.DANGER"
+                                                id="typeerror" />
+                                            <label class="form-check-label" for="typeerror"> Error </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-6 col-md-12">
+                                    <fieldset class="form-group mb-3">
+                                        <label>
+                                            <strong>Toast Position</strong>
+                                        </label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="positionRadio"
+                                                [(ngModel)]="options.toastPosition" [value]="toastPositions.RIGHT_TOP"
+                                                id="toast-top-right" />
+                                            <label for="toast-top-right" class="form-check-label">Top Right</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="positionRadio"
+                                                [(ngModel)]="options.toastPosition"
+                                                [value]="toastPositions.RIGHT_BOTTOM" id="toast-bottom-right" />
+                                            <label for="toast-bottom-right" class="form-check-label">Bottom
+                                                Right</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="positionRadio"
+                                                [(ngModel)]="options.toastPosition" [value]="toastPositions.LEFT_BOTTOM"
+                                                id="toast-bottom-left" />
+                                            <label for="toast-bottom-left" class="form-check-label">Bottom Left</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="positionRadio"
+                                                [(ngModel)]="options.toastPosition" [value]="toastPositions.LEFT_TOP"
+                                                id="toast-top-left" />
+                                            <label for="toast-top-left" class="form-check-label">Top Left</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="positionRadio"
+                                                [(ngModel)]="options.toastPosition" [value]="toastPositions.CENTER"
+                                                id="toast-center" />
+                                            <label for="toast-center" class="form-check-label">Center</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="positionRadio"
+                                                [(ngModel)]="options.toastPosition" [value]="toastPositions.CENTER_TOP"
+                                                id="toast-center-top" />
+                                            <label for="toast-center-top" class="form-check-label">Top Center</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="positionRadio"
+                                                [(ngModel)]="options.toastPosition"
+                                                [value]="toastPositions.CENTER_BOTTOM" id="toast-center-bottom" />
+                                            <label for="toast-center-bottom" class="form-check-label">Bottom
+                                                Center</label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row mb-3">
+                        <div class="col-12 text-center">
+                            <p class="mb-1">
+                                <small>Toast Controls:</small>
+                            </p>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary btn-block mx-1" (click)="openToast()">
+                                    Open Toast
+                                </button>
+                                <button type="button" class="btn btn-danger btn-block mx-1" (click)="removeAll()">
+                                    Remove All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

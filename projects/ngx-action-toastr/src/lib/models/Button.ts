@@ -1,4 +1,11 @@
+import { ButtonTypes } from './SimpleToast';
+
 export class Button {
-  buttonPosition: 'LEFT' | 'RIGHT' = 'RIGHT';
-  text!: string;
+  text: string;
+  buttonType: ButtonTypes;
+
+  constructor(text: string, buttonType: ButtonTypes) {
+    this.text = text;
+    this.buttonType = buttonType;
+  }
 }
