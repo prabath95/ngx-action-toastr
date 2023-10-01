@@ -38,12 +38,13 @@ export class ToastService {
 
   public createSimpleToast(simpleToast: SimpleToast) {
     this.createOrCatchToastContainerElement();
+    simpleToast.toastId = this.generateId();
+    if (this.toastComponent) {
+      this.toastComponent!.instance!.toastPosition = simpleToast.toastPosition;
+    }
     this.toasts.push(simpleToast);
     if (simpleToast.timeToDisplay && simpleToast.timeToDisplay > 0) {
-      this.toastComponent?.instance.setTimeOutForAutoDisappear(
-        simpleToast,
-        this.toasts.length - 1
-      );
+      this.toastComponent?.instance.setTimeOutForAutoDisappear(simpleToast);
     }
   }
 
@@ -51,13 +52,14 @@ export class ToastService {
     this.createOrCatchToastContainerElement();
     const subject = new Subject<Toast>();
     const toast: Toast = actionToast;
+    actionToast.toastId = this.generateId();
+    if (this.toastComponent) {
+      this.toastComponent!.instance!.toastPosition = actionToast.toastPosition;
+    }
     this.toasts.push(toast);
     toast.subject = subject;
     if (actionToast.timeToDisplay && actionToast.timeToDisplay > 0) {
-      this.toastComponent?.instance.setTimeOutForAutoDisappear(
-        actionToast,
-        this.toasts.length - 1
-      );
+      this.toastComponent?.instance.setTimeOutForAutoDisappear(actionToast);
     }
     return subject.asObservable();
   }
@@ -71,5 +73,9 @@ export class ToastService {
     if (this.toastComponent) {
       this.destroy(this.toastComponent);
     }
+  }
+
+  private generateId() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
   }
 }

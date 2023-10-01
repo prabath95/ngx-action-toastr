@@ -17,9 +17,13 @@ export enum ToastPosition {
   RIGHT_TOP = 'RIGHT_TOP',
   LEFT_BOTTOM = 'LEFT_BOTTOM',
   RIGHT_BOTTOM = 'RIGHT_BOTTOM',
+  CENTER = 'CENTER',
+  CENTER_BOTTOM = 'CENTER_BOTTOM',
+  CENTER_TOP = 'CENTER_TOP',
 }
 
 export class SimpleToast {
+  toastId?: string;
   toastPosition: ToastPosition;
   messageBoldFront?: string;
   messageBoldEnd?: string;

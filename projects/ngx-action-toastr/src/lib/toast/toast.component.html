@@ -1,5 +1,12 @@
-<div class="toast-portal-container"
-  [ngClass]="{'toast-portal-container--right':toastPosition === toastPositions.RIGHT_TOP}">
+<div class="toast-portal-container" [ngClass]="{
+    'toast-portal-container--right':toastPosition === toastPositions.RIGHT_TOP,
+    'toast-portal-container--left':toastPosition === toastPositions.LEFT_TOP,
+    'toast-portal-container--right-bottom':toastPosition === toastPositions.RIGHT_BOTTOM,
+    'toast-portal-container--left-bottom':toastPosition === toastPositions.LEFT_BOTTOM,
+    'toast-portal-container--center':toastPosition === toastPositions.CENTER,
+    'toast-portal-container--center-top':toastPosition === toastPositions.CENTER_TOP,
+    'toast-portal-container--center-bottom':toastPosition === toastPositions.CENTER_BOTTOM
+  }">
   <div class="m-toast" *ngFor="let toast of toastService.toasts; let i = index" (click)="tapToDismiss(toast,i)"
     [ngClass]="{
       'm-toast--success':toast.toastType === toastTypes.SUCCESS,
@@ -47,7 +54,7 @@
           'm-toast__btn--info':button.buttonType === buttonTypes.INFO,
           'm-toast__btn--warning':button.buttonType === buttonTypes.WARNING,
           'm-toast__btn--danger':button.buttonType === buttonTypes.DANGER
-        }" (click)="buttonClicked(toast,button)">
+        }" (click)="buttonClicked(toast,button,i)">
           {{button.text}}
         </button>
       </ng-container>

@@ -29,8 +29,11 @@ export class ToastComponent implements OnInit {
    * @param toast toast object
    * @param index item index of the toast
    */
-  setTimeOutForAutoDisappear(toast: Toast, index: number) {
+  setTimeOutForAutoDisappear(toast: Toast) {
     setTimeout(() => {
+      const index = this.toastService.toasts.findIndex(
+        (data) => data.toastId === toast.toastId
+      );
       this.cancel(index);
     }, toast.timeToDisplay);
   }
@@ -72,8 +75,9 @@ export class ToastComponent implements OnInit {
    * @param toast toast object
    * @param button button object
    */
-  buttonClicked(toast: Toast, button: Button) {
+  buttonClicked(toast: Toast, button: Button, index: number) {
     toast.clickedButton = button;
     toast.subject?.next(toast);
+    this.closeAction(index);
   }
 }
