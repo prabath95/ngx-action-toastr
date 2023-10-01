@@ -25,8 +25,6 @@ export enum ToastPosition {
 export class SimpleToast {
   toastId?: string;
   toastPosition: ToastPosition;
-  messageBoldFront?: string;
-  messageBoldEnd?: string;
   message: string;
   isTapToClose?: boolean;
   closeButtonActive?: boolean;

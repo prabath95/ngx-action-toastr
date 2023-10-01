@@ -1,24 +1,69 @@
-# NgxActionToastr
+<div align="center">
+  <img src="https://prabath95.github.io/action-toast.png" width="300" alt="Action Toastr">
+  <br>
+  <h1>ngx-action-toastr</h1>
+  <br>
+  <br>
+</div>
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.0.
+DEMO: https://prabath95.github.io/
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name --project ngx-action-toastr` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-action-toastr`.
-> Note: Don't forget to add `--project ngx-action-toastr` or else it will be added to the default project in your `angular.json` file. 
+- Tost dynamic component creation.
+- AoT compilation and lazy loading compatible.
+- Return observable to handle toast actions.
 
-## Build
+## Install
 
-Run `ng build ngx-action-toastr` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm install ngx-action-toastr --save
+```
 
-## Publishing
+`@fortawesome/free-solid-svg-icons` required for icons 
 
-After building your library with `ng build ngx-action-toastr`, go to the dist folder `cd dist/ngx-action-toastr` and run `npm publish`.
+```bash
+npm install @fortawesome/free-solid-svg-icons --save
+```
 
-## Running unit tests
+## Use
 
-Run `ng test ngx-action-toastr` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```typescript
+import { ToastService, SimpleToast, ToastTypes, ToastPosition, ActionToast, Button, ButtonTypes } from 'ngx-action-toastr';
 
-## Further help
+@Component({...})
+export class YourComponent {
+  constructor(private toast: ToastService) {}
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  simpleToast() {
+     const options = new SimpleToast(
+      ToastPosition.RIGHT_TOP,
+      'Hey! its me Action Toaster.',
+      ToastTypes.SUCCESS
+    );
+    this.toast.createSimpleToast(options);
+  }
+
+  actionToast() {
+    const options = new ActionToast(
+      ToastPosition.RIGHT_TOP,
+      'Hey! its me Action Toaster.',
+      ToastTypes.SUCCESS
+    );
+    // for enable close button
+    option.closeButtonActive = true;
+    // close on click
+    option.isTapToClose = true;
+    // auto disappear in 5 sec
+    option.timeToDisplay = 5000;
+    // toast description
+    option.longMessage = 'This is a long text that describes more about the toast.'
+    options.buttons = [];
+    options.buttons.push(new Button('Confirm',ButtonTypes.SUCCESS))
+    options.buttons.push(new Button('Cancel',ButtonTypes.DANGER))
+    this.toast.createCustomToast(options).subscribe((toast) => {
+        console.log('Handle tost click events here')
+    });
+  }
+}
+```
