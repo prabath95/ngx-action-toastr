@@ -1,27 +1,69 @@
-# Toastr
+<div align="center">
+  <img src="https://prabath95.github.io/action-toast.png" width="300" alt="Action Toastr">
+  <br>
+  <h1>ngx-action-toastr</h1>
+  <br>
+  <br>
+</div>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.12.
+DEMO: https://prabath95.github.io/
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Tost dynamic component creation.
+- AoT compilation and lazy loading compatible.
+- Return observable to handle toast actions.
 
-## Code scaffolding
+## Install
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm install ngx-action-toastr --save
+```
 
-## Build
+`@fortawesome/free-solid-svg-icons` required for icons 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm install @fortawesome/free-solid-svg-icons --save
+```
 
-## Running unit tests
+## Use
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```typescript
+import { ToastService, SimpleToast, ToastTypes, ToastPosition, ActionToast, Button, ButtonTypes } from 'ngx-action-toastr';
 
-## Running end-to-end tests
+@Component({...})
+export class YourComponent {
+  constructor(private toast: ToastService) {}
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  simpleToast() {
+     const options = new SimpleToast(
+      ToastPosition.RIGHT_TOP,
+      'Hey! its me Action Toaster.',
+      ToastTypes.SUCCESS
+    );
+    this.toast.createSimpleToast(options);
+  }
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  actionToast() {
+    const options = new ActionToast(
+      ToastPosition.RIGHT_TOP,
+      'Hey! its me Action Toaster.',
+      ToastTypes.SUCCESS
+    );
+    // for enable close button
+    option.closeButtonActive = true;
+    // close on click
+    option.isTapToClose = true;
+    // auto disappear in 5 sec
+    option.timeToDisplay = 5000;
+    // toast description
+    option.longMessage = 'This is a long text that describes more about the toast.'
+    options.buttons = [];
+    options.buttons.push(new Button('Confirm',ButtonTypes.SUCCESS))
+    options.buttons.push(new Button('Cancel',ButtonTypes.DANGER))
+    this.toast.createCustomToast(options).subscribe((toast) => {
+        console.log('Handle tost click events here')
+    });
+  }
+}
+```

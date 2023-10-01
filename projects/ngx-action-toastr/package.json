@@ -3,9 +3,30 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0"
+    "@angular/core": "^14.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2"
   },
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "keywords": [
+      "angular",
+      "angular 14",
+      "angular 15",
+      "ionic",
+      "ionic-angular",
+      "cropper",
+      "toastr",
+      "toaster",
+      "ngx-toaster",
+      "angular toaster",
+      "action toaster",
+      "alerts",
+      "ngx-action-toastr"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prabath95/ngx-action-toastr"
   }
 }
