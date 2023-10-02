@@ -24,7 +24,6 @@
                                 <textarea [(ngModel)]="options.longMessage" rows="3" class="form-control"
                                     name="toastMessage" id="toastMessage" placeholder="Toast message"></textarea>
                             </div>
-
                             <div class="form-group mb-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="tapToDismiss"
@@ -38,7 +37,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-2">
+                        <div class="col-md-4">
                             <div class="form-group mb-3">
                                 <label for="toastTimeout">
                                     <strong>Timeout(milliseconds)</strong>
@@ -47,74 +46,38 @@
                                     [(ngModel)]="options.timeToDisplay" aria-describedby="toastTimeoutHelp" />
                                 <small id="toastTimeoutHelp" class="form-text text-muted">0 never expires</small>
                             </div>
-
-
-                            <label for="toastTitle" *ngIf="buttons.length > 0">
-                                <strong>Selected Buttons</strong>
-                            </label>
-                            <div class="input-group mb-3" *ngFor="let button of buttons; let i = index">
-                                <input type="text" class="form-control" [value]="button.text" disabled>
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-danger" type="button"
-                                        (click)="removeButton(i)">Remove</button>
-                                </div>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="toastTitle">
-                                    <strong>Set Buttons</strong>
+                            <fieldset class="form-group">
+                                <label>
+                                    <strong>Toast Type</strong>
                                 </label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Name"
-                                        [(ngModel)]="buttonOptions.text">
-                                    <select class="custom-select" id="inputGroupSelect01"
-                                        [(ngModel)]="buttonOptions.buttonType">
-                                        <option selected>Choose...</option>
-                                        <option [value]="buttonTypes.SUCCESS">SUCCESS</option>
-                                        <option [value]="buttonTypes.INFO">INFO</option>
-                                        <option [value]="buttonTypes.WARNING">WARNING</option>
-                                        <option [value]="buttonTypes.DANGER">DANGER</option>
-                                    </select>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button"
-                                            (click)="addButtons()">Button</button>
-                                    </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="typeRadios"
+                                        [(ngModel)]="options.toastType" [value]="toastTypes.SUCCESS"
+                                        id="typesuccess" />
+                                    <label class="form-check-label" for="typesuccess"> Success </label>
                                 </div>
-                            </div>
-
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="typeRadios"
+                                        [(ngModel)]="options.toastType" [value]="toastTypes.INFO"
+                                        id="typeinfo" />
+                                    <label class="form-check-label" for="typeinfo"> Info </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="typeRadios"
+                                        [(ngModel)]="options.toastType" [value]="toastTypes.WARNING"
+                                        id="typewarning" />
+                                    <label class="form-check-label" for="typewarning"> Warning </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="typeRadios"
+                                        [(ngModel)]="options.toastType" [value]="toastTypes.DANGER"
+                                        id="typeerror" />
+                                    <label class="form-check-label" for="typeerror"> Error </label>
+                                </div>
+                            </fieldset>
                         </div>
                         <div class="col-md-3">
                             <div class="row">
-                                <div class="col-6 col-md-12">
-                                    <fieldset class="form-group mb-3">
-                                        <label>
-                                            <strong>Toast Type</strong>
-                                        </label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="typeRadios"
-                                                [(ngModel)]="options.toastType" [value]="toastTypes.SUCCESS"
-                                                id="typesuccess" />
-                                            <label class="form-check-label" for="typesuccess"> Success </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="typeRadios"
-                                                [(ngModel)]="options.toastType" [value]="toastTypes.INFO"
-                                                id="typeinfo" />
-                                            <label class="form-check-label" for="typeinfo"> Info </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="typeRadios"
-                                                [(ngModel)]="options.toastType" [value]="toastTypes.WARNING"
-                                                id="typewarning" />
-                                            <label class="form-check-label" for="typewarning"> Warning </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="typeRadios"
-                                                [(ngModel)]="options.toastType" [value]="toastTypes.DANGER"
-                                                id="typeerror" />
-                                            <label class="form-check-label" for="typeerror"> Error </label>
-                                        </div>
-                                    </fieldset>
-                                </div>
                                 <div class="col-6 col-md-12">
                                     <fieldset class="form-group mb-3">
                                         <label>
@@ -166,6 +129,51 @@
                                         </div>
                                     </fieldset>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="toastTitle" *ngIf="buttons.length > 0">
+                                    <strong>Selected Buttons</strong>
+                                </label>
+                                <div class="row">
+                                    <div class="col-4 mb-3" *ngFor="let button of buttons; let i = index">
+                                        <div class="d-flex justify-content-between">
+                                            <input type="text" class="form-control me-1" [value]="button.text" disabled>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-danger" type="button"
+                                                    (click)="removeButton(i)">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="toastTitle">
+                                    <strong>Set Buttons</strong>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Name for button"
+                                        [(ngModel)]="buttonOptions.text">
+                                        <select class="custom-select" id="inputGroupSelect01"
+                                            [(ngModel)]="buttonOptions.buttonType">
+                                            <option selected>Choose...</option>
+                                            <option [value]="buttonTypes.SUCCESS">SUCCESS</option>
+                                            <option [value]="buttonTypes.INFO">INFO</option>
+                                            <option [value]="buttonTypes.WARNING">WARNING</option>
+                                            <option [value]="buttonTypes.DANGER">DANGER</option>
+                                        </select>
+                                    <div class="input-group-append">
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-secondary" type="button"
+                                    (click)="addButtons()">Add Button</button>
                             </div>
                         </div>
                     </div>

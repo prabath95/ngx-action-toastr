@@ -1,33 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
-$m-btn-color-dark-success: #3c691d;
-$m-btn-color-dark-info: #2f4b67;
-$m-btn-color-dark-warning: #675f2f;
-$m-btn-color-dark-danger: #672f2f;
+$m-btn-color-dark-success: #36843a;
+$m-btn-color-dark-info: #0a6ca2;
+$m-btn-color-dark-warning: #be7c0f;
+$m-btn-color-dark-danger: #b22827;
 
-$m-success-color: #4caf50;
+$m-success-color: #43a047;
 $m-success-color-light: #fff;
-$m-success-color-dark: #1f6b22;
+$m-success-color-dark: #36843a;
 
-$m-info-color: #4c78af;
+$m-info-color: #0288d1;
 $m-info-color-light: #fff;
-$m-info-color-dark: #1d395b;
+$m-info-color-dark: #0a6ca2;
 
-$m-warning-color: #afac4c;
+$m-warning-color: #e0920f;
 $m-warning-color-light: #fff;
-$m-warning-color-dark: #69661d;
+$m-warning-color-dark: #be7c0f;
 
-$m-danger-color: #af4c4c;
+$m-danger-color: #d32f2f;
 $m-danger-color-light: #fff;
-$m-danger-color-dark: #461313;
+$m-danger-color-dark: #b22827;
 
 .toast-portal-container {
   font-family: "Lato", sans-serif;
   position: fixed;
   z-index: 9999;
   .m-toast {
-    min-width: 300px;
-    width: 400px;
+    min-width: 350px;
+    width: 450px;
     background: #333;
     padding: 10px;
     border-radius: 15px;
@@ -36,20 +36,17 @@ $m-danger-color-dark: #461313;
       display: flex;
       gap: 15px;
       justify-content: flex-start;
-      align-items: center;
       .m-toast__outer-body {
         display: flex;
         gap: 15px;
         justify-content: space-between;
         color: #fff;
         flex-grow: 1;
-        align-items: flex-start;
         .m-toast__body-left {
           color: #fff;
           .m-toast-title__head {
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 3px;
           }
           .m-toast-title__sub {
             font-size: 13px;
@@ -79,6 +76,8 @@ $m-danger-color-dark: #461313;
       border: none;
       border-radius: 3px;
       min-width: 100px;
+      border: 1px solid #ffffff;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
     .m-toast__close-btn {
       width: 28px;
@@ -221,7 +220,7 @@ $m-danger-color-dark: #461313;
     line-height: 10px;
     border-radius: 100px;
     background: #fff;
-    padding: 5px;
+    padding: 2px;
     /* display: block; */
   }
 }
@@ -247,7 +246,7 @@ $m-danger-color-dark: #461313;
 }
 
 .toast-portal-container--center-bottom {
-  bottom: o;
+  bottom: 10px;
   right: 0;
   width: 100%;
   text-align: -webkit-center;
@@ -261,15 +260,10 @@ $m-danger-color-dark: #461313;
 }
 
 .toast-portal-container--center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
-  bottom: 0;
-  right: 0;
-  width: 100%;
   position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .ml-5 {

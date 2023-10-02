@@ -31,9 +31,9 @@
           </svg>
         </div>
       </div>
-      <div class="m-toast__outer-body">
+      <div class="m-toast__outer-body" [ngStyle]="{'align-items': toast.longMessage ? 'flex-start' : 'center'}">
         <div class="m-toast__body-left">
-          <div class="m-toast-title__head">{{toast.message}}</div>
+          <div class="m-toast-title__head" [ngStyle]="{'margin-bottom': toast.longMessage ? '3px' : '0px'}">{{toast.message}}</div>
           <div class="m-toast-paragraph" *ngIf="toast.longMessage">
             {{toast.longMessage}}
           </div>
@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="m-toast__outer-footer">
+    <div class="m-toast__outer-footer" *ngIf="toast?.buttons">
       <ng-container *ngFor="let button of toast?.buttons">
         <button class="m-toast__btn m-toast__btn-main mr-5" [ngClass]="{
           'm-toast__btn--success':button.buttonType === buttonTypes.SUCCESS,
