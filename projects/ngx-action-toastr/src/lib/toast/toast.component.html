@@ -12,7 +12,8 @@
       'm-toast--success':toast.toastType === toastTypes.SUCCESS,
       'm-toast--info':toast.toastType === toastTypes.INFO,
       'm-toast--warning':toast.toastType === toastTypes.WARNING,
-      'm-toast--danger':toast.toastType === toastTypes.DANGER
+      'm-toast--danger':toast.toastType === toastTypes.DANGER,
+      'm-toast--default':toast.toastType === toastTypes.DEFAULT
     }">
     <div class="m-toast__content">
       <div class="m-toast__icon-outer">
@@ -28,6 +29,9 @@
           </svg>
           <svg class="a-icon" viewBox="0 0 512 512" *ngIf="toast.toastType === toastTypes.DANGER">
             <path [attr.d]="svgIcons.faExclamationCircle.icon[4]"></path>
+          </svg>
+          <svg class="a-icon" viewBox="0 0 512 512" *ngIf="toast.toastType === toastTypes.DEFAULT">
+            <path [attr.d]="svgIcons.faCircleCheck.icon[4]"></path>
           </svg>
         </div>
       </div>

@@ -31,7 +31,11 @@ export class AppComponent {
       'Hey! its me Action Toaster.',
       ToastTypes.SUCCESS
     );
+    this.options.longMessage =
+      'Tost long message can hold descriptions about the toast content.';
     this.options.timeToDisplay = 5000;
+    this.buttons.push(new Button('Confirm', ButtonTypes.SUCCESS));
+    this.buttons.push(new Button('Cancel', ButtonTypes.DANGER));
   }
 
   addButtons() {
@@ -49,7 +53,7 @@ export class AppComponent {
   openToast() {
     if (this.buttons.length > 0) {
       const toast = JSON.parse(JSON.stringify(this.options));
-      toast.buttons = this.buttons;
+      toast.buttons = JSON.parse(JSON.stringify(this.buttons));
       this.toastService.createCustomToast(toast);
     } else {
       const toast = JSON.parse(JSON.stringify(this.options));
