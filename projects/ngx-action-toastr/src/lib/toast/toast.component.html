@@ -12,7 +12,8 @@
       'm-toast--success':toast.toastType === toastTypes.SUCCESS,
       'm-toast--info':toast.toastType === toastTypes.INFO,
       'm-toast--warning':toast.toastType === toastTypes.WARNING,
-      'm-toast--danger':toast.toastType === toastTypes.DANGER
+      'm-toast--danger':toast.toastType === toastTypes.DANGER,
+      'm-toast--default':toast.toastType === toastTypes.DEFAULT
     }">
     <div class="m-toast__content">
       <div class="m-toast__icon-outer">
@@ -29,11 +30,14 @@
           <svg class="a-icon" viewBox="0 0 512 512" *ngIf="toast.toastType === toastTypes.DANGER">
             <path [attr.d]="svgIcons.faExclamationCircle.icon[4]"></path>
           </svg>
+          <svg class="a-icon" viewBox="0 0 512 512" *ngIf="toast.toastType === toastTypes.DEFAULT">
+            <path [attr.d]="svgIcons.faCircleCheck.icon[4]"></path>
+          </svg>
         </div>
       </div>
-      <div class="m-toast__outer-body">
+      <div class="m-toast__outer-body" [ngStyle]="{'align-items': toast.longMessage ? 'flex-start' : 'center'}">
         <div class="m-toast__body-left">
-          <div class="m-toast-title__head">{{toast.message}}</div>
+          <div class="m-toast-title__head" [ngStyle]="{'margin-bottom': toast.longMessage ? '3px' : '0px'}">{{toast.message}}</div>
           <div class="m-toast-paragraph" *ngIf="toast.longMessage">
             {{toast.longMessage}}
           </div>
@@ -47,7 +51,7 @@
         </div>
       </div>
     </div>
-    <div class="m-toast__outer-footer">
+    <div class="m-toast__outer-footer" *ngIf="toast?.buttons">
       <ng-container *ngFor="let button of toast?.buttons">
         <button class="m-toast__btn m-toast__btn-main mr-5" [ngClass]="{
           'm-toast__btn--success':button.buttonType === buttonTypes.SUCCESS,
