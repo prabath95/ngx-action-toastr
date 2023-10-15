@@ -8,7 +8,7 @@ import {
 import { Toast } from '../models/Toast';
 import { ToastComponent } from '../toast/toast.component';
 import { Observable, Subject } from 'rxjs';
-import { SimpleToast } from '../models/SimpleToast';
+import { SimpleToast, ToastPosition, ToastTypes } from '../models/SimpleToast';
 import { ActionToast } from '../models/ActionToast';
 
 @Injectable({
@@ -17,11 +17,29 @@ import { ActionToast } from '../models/ActionToast';
 export class ToastService {
   private toastComponent!: ComponentRef<ToastComponent> | null;
   toasts: Array<Toast> = [];
+  private defaultToastSettings!: SimpleToast;
 
   constructor(
     private appRef: ApplicationRef,
     private injector: EnvironmentInjector
-  ) {}
+  ) {
+    this.setDefaultConfig();
+  }
+
+  private setDefaultConfig() {
+    const simpleToast = new SimpleToast(
+      ToastPosition.RIGHT_TOP,
+      '',
+      ToastTypes.DANGER
+    );
+    simpleToast.timeToDisplay = 6000;
+    simpleToast.closeButtonActive = true;
+    this.defaultConfig(simpleToast);
+  }
+
+  public defaultConfig(toast: SimpleToast) {
+    this.defaultToastSettings = toast;
+  }
 
   private createOrCatchToastContainerElement() {
     if (!this.toastComponent) {
@@ -34,6 +52,61 @@ export class ToastService {
       document.body.appendChild(this.toastComponent.location.nativeElement);
       this.appRef.attachView(this.toastComponent.hostView);
     }
+  }
+
+  public success(message: string, detailMessage?: string) {
+    const simpleToast: SimpleToast = JSON.parse(
+      JSON.stringify(this.defaultToastSettings)
+    );
+    simpleToast.toastId = this.generateId();
+    simpleToast.message = message;
+    simpleToast.longMessage = detailMessage;
+    simpleToast.toastType = ToastTypes.SUCCESS;
+    this.createSimpleToast(simpleToast);
+  }
+
+  public warning(message: string, detailMessage?: string) {
+    const simpleToast: SimpleToast = JSON.parse(
+      JSON.stringify(this.defaultToastSettings)
+    );
+    simpleToast.toastId = this.generateId();
+    simpleToast.message = message;
+    simpleToast.longMessage = detailMessage;
+    simpleToast.toastType = ToastTypes.WARNING;
+    this.createSimpleToast(simpleToast);
+  }
+
+  public danger(message: string, detailMessage?: string) {
+    const simpleToast: SimpleToast = JSON.parse(
+      JSON.stringify(this.defaultToastSettings)
+    );
+    simpleToast.toastId = this.generateId();
+    simpleToast.message = message;
+    simpleToast.longMessage = detailMessage;
+    simpleToast.toastType = ToastTypes.DANGER;
+    this.createSimpleToast(simpleToast);
+  }
+
+  public info(message: string, detailMessage?: string) {
+    const simpleToast: SimpleToast = JSON.parse(
+      JSON.stringify(this.defaultToastSettings)
+    );
+    simpleToast.toastId = this.generateId();
+    simpleToast.message = message;
+    simpleToast.longMessage = detailMessage;
+    simpleToast.toastType = ToastTypes.INFO;
+    this.createSimpleToast(simpleToast);
+  }
+
+  public default(message: string, detailMessage?: string) {
+    const simpleToast: SimpleToast = JSON.parse(
+      JSON.stringify(this.defaultToastSettings)
+    );
+    simpleToast.toastId = this.generateId();
+    simpleToast.message = message;
+    simpleToast.longMessage = detailMessage;
+    simpleToast.toastType = ToastTypes.DEFAULT;
+    this.createSimpleToast(simpleToast);
   }
 
   public createSimpleToast(simpleToast: SimpleToast) {
@@ -71,6 +144,7 @@ export class ToastService {
 
   public removeAll() {
     if (this.toastComponent) {
+      this.toasts = [];
       this.destroy(this.toastComponent);
     }
   }

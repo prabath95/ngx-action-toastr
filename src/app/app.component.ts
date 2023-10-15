@@ -64,4 +64,29 @@ export class AppComponent {
   removeAll() {
     this.toastService.removeAll();
   }
+
+  openSuccessToast() {
+    const toast = JSON.parse(JSON.stringify(this.options));
+    this.toastService.success(toast.message, toast.longMessage);
+  }
+
+  openInfoToast() {
+    const toast = JSON.parse(JSON.stringify(this.options));
+    this.toastService.info(toast.message, toast.longMessage);
+  }
+
+  openWarningToast() {
+    const toast = JSON.parse(JSON.stringify(this.options));
+    this.toastService.warning(toast.message, toast.longMessage);
+  }
+
+  openDangerToast() {
+    const toast = JSON.parse(JSON.stringify(this.options));
+    this.toastService.danger(toast.message, toast.longMessage);
+  }
+
+  openDefaultToast() {
+    const toast = JSON.parse(JSON.stringify(this.options));
+    this.toastService.default(toast.message, toast.longMessage);
+  }
 }

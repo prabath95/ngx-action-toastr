@@ -1,4 +1,8 @@
 <div align="center">
+  <img src="https://prabath95.github.io/simple-toast.png" width="300" alt="Action Toastr">
+  <br>
+  <img src="https://prabath95.github.io/detail-toast.png" width="300" alt="Action Toastr">
+  <br>
   <img src="https://prabath95.github.io/action-toast.png" width="300" alt="Action Toastr">
   <br>
   <h1>ngx-action-toastr</h1>
@@ -11,6 +15,7 @@ DEMO: https://prabath95.github.io/
 ## Features
 
 - Tost dynamic component creation.
+- Simple usage with out huge line of codes.
 - AoT compilation and lazy loading compatible.
 - Return observable to handle toast actions.
 
@@ -64,6 +69,26 @@ export class YourComponent {
     this.toast.createCustomToast(options).subscribe((toast) => {
         console.log('Handle tost click events here')
     });
+  }
+
+  openSuccessToast() {
+    this.toastService.success('Hey! its me Action Toaster.');
+  }
+
+  openInfoToast() {
+    this.toastService.info('Hey! its me Action Toaster.');
+  }
+
+  openWarningToast() {
+    this.toastService.warning('Hey! its me Action Toaster.');
+  }
+
+  openDangerToast() {
+    this.toastService.danger('Hey! its me Action Toaster.');
+  }
+
+  openDefaultToast() {
+    this.toastService.default('Hey! its me Action Toaster.');
   }
 }
 ```

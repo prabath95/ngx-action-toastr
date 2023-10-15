@@ -1,0 +1,40 @@
+$m-btn-color-dark-success: #36843a;
+$m-btn-color-dark-info: #0a6ca2;
+$m-btn-color-dark-warning: #be7c0f;
+$m-btn-color-dark-danger: #b22827;
+
+$m-success-color: #43a047;
+$m-success-color-light: #fff;
+$m-success-color-dark: #36843a;
+
+$m-info-color: #0288d1;
+$m-info-color-light: #fff;
+$m-info-color-dark: #0a6ca2;
+
+$m-warning-color: #e0920f;
+$m-warning-color-light: #fff;
+$m-warning-color-dark: #be7c0f;
+
+$m-danger-color: #d32f2f;
+$m-danger-color-light: #fff;
+$m-danger-color-dark: #b22827;
+
+.success-btn-color {
+  background-color: $m-success-color;
+}
+
+.info-btn-color {
+  background-color: $m-info-color;
+}
+
+.warning-btn-color {
+  background-color: $m-warning-color;
+}
+
+.danger-btn-color {
+  background-color: $m-danger-color;
+}
+
+.default-btn-color {
+  background-color: #333;
+}
