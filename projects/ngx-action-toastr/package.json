@@ -1,6 +1,6 @@
 {
   "name": "ngx-action-toastr",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "peerDependencies": {
     "@angular/common": "^14.2.0",
     "@angular/core": "^14.2.0",
@@ -9,6 +9,7 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "description": "Simple action toastr for Angular",
   "keywords": [
       "angular",
       "angular 14",
@@ -22,7 +23,16 @@
       "angular toaster",
       "action toaster",
       "alerts",
-      "ngx-action-toastr"
+      "ngx-action-toastr",
+      "ng2",
+      "ngx",
+      "ngx-toastr",
+      "toastr-ng2",
+      "angular2",
+      "typescript",
+      "alert",
+      "toast",
+      "notifications"
   ],
   "license": "MIT",
   "repository": {

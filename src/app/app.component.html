@@ -52,32 +52,27 @@
                                 </label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="typeRadios"
-                                        [(ngModel)]="options.toastType" [value]="toastTypes.SUCCESS"
-                                        id="typesuccess" />
+                                        [(ngModel)]="options.toastType" [value]="toastTypes.SUCCESS" id="typesuccess" />
                                     <label class="form-check-label" for="typesuccess"> Success </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="typeRadios"
-                                        [(ngModel)]="options.toastType" [value]="toastTypes.INFO"
-                                        id="typeinfo" />
+                                        [(ngModel)]="options.toastType" [value]="toastTypes.INFO" id="typeinfo" />
                                     <label class="form-check-label" for="typeinfo"> Info </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="typeRadios"
-                                        [(ngModel)]="options.toastType" [value]="toastTypes.WARNING"
-                                        id="typewarning" />
+                                        [(ngModel)]="options.toastType" [value]="toastTypes.WARNING" id="typewarning" />
                                     <label class="form-check-label" for="typewarning"> Warning </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="typeRadios"
-                                        [(ngModel)]="options.toastType" [value]="toastTypes.DANGER"
-                                        id="typeerror" />
+                                        [(ngModel)]="options.toastType" [value]="toastTypes.DANGER" id="typeerror" />
                                     <label class="form-check-label" for="typeerror"> Error </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="typeRadios"
-                                        [(ngModel)]="options.toastType" [value]="toastTypes.DEFAULT"
-                                        id="typeerror" />
+                                        [(ngModel)]="options.toastType" [value]="toastTypes.DEFAULT" id="typeerror" />
                                     <label class="form-check-label" for="typeerror"> Default </label>
                                 </div>
                             </fieldset>
@@ -167,19 +162,29 @@
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" placeholder="Name for button"
                                         [(ngModel)]="buttonOptions.text">
-                                        <select class="custom-select" id="inputGroupSelect01"
-                                            [(ngModel)]="buttonOptions.buttonType">
-                                            <option selected>Choose...</option>
-                                            <option [value]="buttonTypes.SUCCESS">SUCCESS</option>
-                                            <option [value]="buttonTypes.INFO">INFO</option>
-                                            <option [value]="buttonTypes.WARNING">WARNING</option>
-                                            <option [value]="buttonTypes.DANGER">DANGER</option>
-                                        </select>
+                                    <select class="custom-select" id="inputGroupSelect01"
+                                        [(ngModel)]="buttonOptions.buttonType">
+                                        <option selected>Choose...</option>
+                                        <option [value]="buttonTypes.SUCCESS">SUCCESS</option>
+                                        <option [value]="buttonTypes.INFO">INFO</option>
+                                        <option [value]="buttonTypes.WARNING">WARNING</option>
+                                        <option [value]="buttonTypes.DANGER">DANGER</option>
+                                    </select>
                                     <div class="input-group-append">
                                     </div>
                                 </div>
-                                <button class="btn btn-outline-secondary" type="button"
-                                    (click)="addButtons()">Add Button</button>
+                                <button class="btn btn-outline-secondary" type="button" (click)="addButtons()">Add
+                                    Button</button>
+                            </div>
+                        </div>
+                        <div class="col-8 text-start" style="margin-top: auto;">
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary btn-block mx-1" (click)="openToast()">
+                                    Open Toast
+                                </button>
+                                <button type="button" class="btn btn-danger btn-block mx-1" (click)="removeAll()">
+                                    Remove All
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -187,14 +192,23 @@
                     <div class="row mb-3">
                         <div class="col-12 text-center">
                             <p class="mb-1">
-                                <small>Toast Controls:</small>
+                                <small>Toast Simple Controls:</small>
                             </p>
                             <div class="d-flex justify-content-center">
-                                <button type="button" class="btn btn-primary btn-block mx-1" (click)="openToast()">
-                                    Open Toast
+                                <button type="button" class="btn success-btn-color btn-block mx-1" (click)="openSuccessToast()">
+                                    Success
                                 </button>
-                                <button type="button" class="btn btn-danger btn-block mx-1" (click)="removeAll()">
-                                    Remove All
+                                <button type="button" class="btn info-btn-color btn-block mx-1" (click)="openInfoToast()">
+                                    Info
+                                </button>
+                                <button type="button" class="btn warning-btn-color btn-block mx-1" (click)="openWarningToast()">
+                                    Warning
+                                </button>
+                                <button type="button" class="btn danger-btn-color btn-block mx-1" (click)="openDangerToast()">
+                                    Danger
+                                </button>
+                                <button type="button" class="btn default-btn-color btn-block mx-1" (click)="openDefaultToast()">
+                                    Default
                                 </button>
                             </div>
                         </div>
