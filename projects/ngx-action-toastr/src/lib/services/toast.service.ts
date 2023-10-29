@@ -30,7 +30,7 @@ export class ToastService {
     const simpleToast = new SimpleToast(
       ToastPosition.RIGHT_TOP,
       '',
-      ToastTypes.DANGER
+      ToastTypes.DANGER,
     );
     simpleToast.timeToDisplay = 6000;
     simpleToast.closeButtonActive = true;

@@ -3,7 +3,12 @@ import { Toast } from '../models/Toast';
 import { Button } from '../models/Button';
 import * as icons from '@fortawesome/free-solid-svg-icons';
 import { ToastService } from '../services/toast.service';
-import { ToastPosition, ToastTypes, ButtonTypes } from '../models/SimpleToast';
+import {
+  ToastPosition,
+  ToastTypes,
+  ButtonTypes,
+  Theme,
+} from '../models/SimpleToast';
 
 @Component({
   selector: 'lib-toast',
@@ -17,7 +22,9 @@ export class ToastComponent implements OnInit {
   svgIcons = icons;
   toastPosition: ToastPosition = ToastPosition.RIGHT_TOP;
   toastPositions = ToastPosition;
+  themes = Theme;
   toastTypes = ToastTypes;
+  theme: Theme = Theme.DEFAULT;
   buttonTypes = ButtonTypes;
 
   constructor(public toastService: ToastService) {}
@@ -30,6 +37,8 @@ export class ToastComponent implements OnInit {
    * @param index item index of the toast
    */
   setTimeOutForAutoDisappear(toast: Toast) {
+    this.theme = toast.theme;
+    this.toastPosition = toast.toastPosition;
     setTimeout(() => {
       const index = this.toastService.toasts.findIndex(
         (data) => data.toastId === toast.toastId

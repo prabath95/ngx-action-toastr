@@ -4,6 +4,7 @@ import {
   ActionToast,
   Button,
   SimpleToast,
+  Theme,
   ToastPosition,
   ToastService,
   ToastTypes,
@@ -23,6 +24,7 @@ export class AppComponent {
     buttonType: ButtonTypes.SUCCESS,
   };
   buttonTypes = ButtonTypes;
+  themes = Theme;
   buttons: Array<Button> = [];
 
   constructor(private toastService: ToastService) {
@@ -34,6 +36,7 @@ export class AppComponent {
     this.options.longMessage =
       'Tost long message can hold descriptions about the toast content.';
     this.options.timeToDisplay = 5000;
+    this.options.theme = this.themes.CLASSIC;
     this.buttons.push(new Button('Confirm', ButtonTypes.SUCCESS));
     this.buttons.push(new Button('Cancel', ButtonTypes.DANGER));
   }
@@ -65,27 +68,37 @@ export class AppComponent {
     this.toastService.removeAll();
   }
 
+  setDefaults() {
+    const toast = JSON.parse(JSON.stringify(this.options));
+    this.toastService.defaultConfig(toast);
+  }
+
   openSuccessToast() {
+    this.setDefaults();
     const toast = JSON.parse(JSON.stringify(this.options));
     this.toastService.success(toast.message, toast.longMessage);
   }
 
   openInfoToast() {
+    this.setDefaults();
     const toast = JSON.parse(JSON.stringify(this.options));
     this.toastService.info(toast.message, toast.longMessage);
   }
 
   openWarningToast() {
+    this.setDefaults();
     const toast = JSON.parse(JSON.stringify(this.options));
     this.toastService.warning(toast.message, toast.longMessage);
   }
 
   openDangerToast() {
+    this.setDefaults();
     const toast = JSON.parse(JSON.stringify(this.options));
     this.toastService.danger(toast.message, toast.longMessage);
   }
 
   openDefaultToast() {
+    this.setDefaults();
     const toast = JSON.parse(JSON.stringify(this.options));
     this.toastService.default(toast.message, toast.longMessage);
   }

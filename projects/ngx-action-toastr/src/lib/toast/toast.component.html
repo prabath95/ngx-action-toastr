@@ -1,11 +1,13 @@
-<div class="toast-portal-container" [ngClass]="{
+<div class="toast-dasy-portal-container" [ngClass]="{
     'toast-portal-container--right':toastPosition === toastPositions.RIGHT_TOP,
     'toast-portal-container--left':toastPosition === toastPositions.LEFT_TOP,
     'toast-portal-container--right-bottom':toastPosition === toastPositions.RIGHT_BOTTOM,
     'toast-portal-container--left-bottom':toastPosition === toastPositions.LEFT_BOTTOM,
     'toast-portal-container--center':toastPosition === toastPositions.CENTER,
     'toast-portal-container--center-top':toastPosition === toastPositions.CENTER_TOP,
-    'toast-portal-container--center-bottom':toastPosition === toastPositions.CENTER_BOTTOM
+    'toast-portal-container--center-bottom':toastPosition === toastPositions.CENTER_BOTTOM,
+    'toast-dasy-portal-container':theme === themes.CLASSIC,
+    'toast-portal-container':theme === themes.DEFAULT
   }">
   <div class="m-toast" *ngFor="let toast of toastService.toasts; let i = index" (click)="tapToDismiss(toast,i)"
     [ngClass]="{
@@ -37,7 +39,8 @@
       </div>
       <div class="m-toast__outer-body" [ngStyle]="{'align-items': toast.longMessage ? 'flex-start' : 'center'}">
         <div class="m-toast__body-left">
-          <div class="m-toast-title__head" [ngStyle]="{'margin-bottom': toast.longMessage ? '3px' : '0px'}">{{toast.message}}</div>
+          <div class="m-toast-title__head" [ngStyle]="{'margin-bottom': toast.longMessage ? '3px' : '0px'}">
+            {{toast.message}}</div>
           <div class="m-toast-paragraph" *ngIf="toast.longMessage">
             {{toast.longMessage}}
           </div>
