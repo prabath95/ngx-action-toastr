@@ -1,4 +1,6 @@
 <div align="center">
+  <img src="https://prabath95.github.io/classic_theme.png" width="300" alt="Action Toastr">
+  <br>
   <img src="https://prabath95.github.io/simple-toast.png" width="300" alt="Action Toastr">
   <br>
   <img src="https://prabath95.github.io/detail-toast.png" width="300" alt="Action Toastr">
@@ -38,7 +40,9 @@ import { ToastService, SimpleToast, ToastTypes, ToastPosition, ActionToast, Butt
 
 @Component({...})
 export class YourComponent {
-  constructor(private toast: ToastService) {}
+  constructor(private toast: ToastService) {
+    this.setDefaults();
+  }
 
   simpleToast() {
      const options = new SimpleToast(
@@ -69,6 +73,18 @@ export class YourComponent {
     this.toast.createCustomToast(options).subscribe((toast) => {
         console.log('Handle tost click events here')
     });
+  }
+
+  setDefaults() {
+    const simpleToast = new SimpleToast(
+      ToastPosition.RIGHT_TOP,
+      '',
+      ToastTypes.DANGER,
+      Theme.CLASSIC
+    );
+    simpleToast.timeToDisplay = 6000;
+    simpleToast.closeButtonActive = true;
+    this.toastService.defaultConfig(simpleToast);
   }
 
   openSuccessToast() {

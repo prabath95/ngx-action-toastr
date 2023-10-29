@@ -13,6 +13,11 @@ export enum ButtonTypes {
   INFO = 'INFO',
 }
 
+export enum Theme {
+  DEFAULT = 'DEFAULT',
+  CLASSIC = 'CLASSIC',
+}
+
 export enum ToastPosition {
   LEFT_TOP = 'LEFT_TOP',
   RIGHT_TOP = 'RIGHT_TOP',
@@ -24,6 +29,7 @@ export enum ToastPosition {
 }
 
 export class SimpleToast {
+  theme: Theme;
   toastId?: string;
   toastPosition: ToastPosition;
   message: string;
@@ -39,10 +45,12 @@ export class SimpleToast {
   constructor(
     toastPosition: ToastPosition,
     message: string,
-    toastType: ToastTypes
+    toastType: ToastTypes,
+    theme: Theme = Theme.DEFAULT
   ) {
     this.toastPosition = toastPosition;
     this.message = message;
     this.toastType = toastType;
+    this.theme = theme;
   }
 }

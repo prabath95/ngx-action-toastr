@@ -19,6 +19,32 @@ $m-danger-color: #d32f2f;
 $m-danger-color-light: #fff;
 $m-danger-color-dark: #b22827;
 
+$m-dasy-success-color: hsl(158.08deg 63.93% 52.16%);
+$m-dasy-info-color: hsl(197.78deg 92.2% 59.8%);
+$m-dasy-warning-color: hsl(43.26deg 95.56% 55.88%);
+$m-dasy-danger-color: hsl(0deg 91.84% 71.18%);
+$m-toast-default-color: #bfbfbf;
+
+.success-dasy-btn-color {
+  background-color: $m-dasy-success-color;
+}
+
+.info-dasy-btn-color {
+  background-color: $m-dasy-info-color;
+}
+
+.warning-dasy-btn-color {
+  background-color: $m-dasy-warning-color;
+}
+
+.danger-dasy-btn-color {
+  background-color: $m-dasy-danger-color;
+}
+
+.default-dasy-btn-color {
+  background-color: $m-toast-default-color;
+}
+
 .success-btn-color {
   background-color: $m-success-color;
 }

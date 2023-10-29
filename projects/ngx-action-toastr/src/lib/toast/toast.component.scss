@@ -1,9 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
+$m-white: #fff;
+$m-black: #000000;
+
 $m-btn-color-dark-success: #36843a;
 $m-btn-color-dark-info: #0a6ca2;
 $m-btn-color-dark-warning: #be7c0f;
 $m-btn-color-dark-danger: #b22827;
+
+$m-btn-dasy-color-dark-success: hsl(132.23deg 95.87% 63.89%);
+$m-btn-dasy-color-dark-info: hsl(212.86deg 95.87% 63.89%);
+$m-btn-dasy-color-dark-warning: hsl(25.68deg 95.87% 63.89%);
+$m-btn-dasy-color-dark-danger: hsl(0deg 97.24% 70.36%);
+
+$m-dasy-success-color: hsl(158.08deg 63.93% 52.16%);
+$m-dasy-info-color: hsl(197.78deg 92.2% 59.8%);
+$m-dasy-warning-color: hsl(43.26deg 95.56% 55.88%);
+$m-dasy-danger-color: hsl(0deg 91.84% 71.18%);
+$m-toast-default-color: #bfbfbf;
 
 $m-success-color: #43a047;
 $m-success-color-light: #fff;
@@ -78,7 +92,8 @@ $m-danger-color-dark: #b22827;
       border-radius: 3px;
       min-width: 100px;
       border: 1px solid #ffffff;
-      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
     .m-toast__close-btn {
       width: 28px;
@@ -87,6 +102,9 @@ $m-danger-color-dark: #b22827;
       background: none;
       box-shadow: none;
       border: none;
+      svg {
+        fill: $m-success-color-dark;
+      }
     }
     .m-toast__btn-link {
       background: none;
@@ -107,10 +125,14 @@ $m-danger-color-dark: #b22827;
     .m-toast__view-more {
       color: $m-success-color-dark;
     }
-    .m-toast__icon,
-    .m-toast__close-btn {
+    .m-toast__icon {
       svg {
         fill: $m-success-color-dark;
+      }
+    }
+    .m-toast__close-btn {
+      svg {
+        fill: black;
       }
     }
     .m-toast__btn--success {
@@ -221,6 +243,256 @@ $m-danger-color-dark: #b22827;
     line-height: 10px;
     border-radius: 100px;
     background: #fff;
+    padding: 2px;
+    /* display: block; */
+  }
+}
+
+.toast-dasy-portal-container {
+  font-family: "Lato", sans-serif;
+  position: fixed;
+  z-index: 9999;
+  .m-toast {
+    min-width: 350px;
+    width: 450px;
+    background: #bfbfbf;
+    padding: 10px;
+    border-radius: 15px;
+    position: relative;
+    .m-toast__content {
+      display: flex;
+      gap: 15px;
+      justify-content: flex-start;
+      .m-toast__outer-body {
+        display: flex;
+        gap: 15px;
+        justify-content: space-between;
+        color: #000000;
+        flex-grow: 1;
+        text-align: left;
+        .m-toast__body-left {
+          color: #000000;
+          .m-toast-title__head {
+            font-size: 16px;
+            font-weight: 600;
+          }
+          .m-toast-title__sub {
+            font-size: 13px;
+            font-weight: 400;
+            margin-bottom: 10px;
+          }
+          .m-toast-paragraph {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+    .m-toast__outer-footer {
+      display: flex;
+      margin-top: 6px;
+      align-items: center;
+      flex-grow: 1;
+      justify-content: flex-end;
+    }
+    .m-toast__btn {
+      cursor: pointer;
+    }
+    .m-toast__btn-main {
+      cursor: pointer;
+      font-size: 13px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      min-width: 100px;
+    }
+    .m-toast__close-btn {
+      width: 28px;
+      height: 28px;
+      line-height: 3px;
+      background: none;
+      box-shadow: none;
+      border: none;
+    }
+    .m-toast__btn-link {
+      background: none;
+      box-shadow: none;
+      border: none;
+      text-decoration: underline;
+      padding: 0;
+      display: block;
+      margin-top: 5px;
+    }
+  }
+  .m-toast:not(:first-child) {
+    margin-top: 10px;
+  }
+  .m-toast--default {
+    background: $m-toast-default-color;
+    .m-toast__view-more {
+      color: $m-success-color-dark;
+    }
+    .m-toast__icon {
+      svg {
+        fill: $m-toast-default-color;
+      }
+    }
+    .m-toast__close-btn {
+      svg {
+        fill: black;
+      }
+    }
+    .m-toast__btn--success {
+      background: $m-btn-dasy-color-dark-success;
+      color: #000000;
+    }
+    .m-toast__btn--info {
+      background: $m-btn-dasy-color-dark-info;
+      color: #000000;
+    }
+    .m-toast__btn--warning {
+      background: $m-btn-dasy-color-dark-warning;
+      color: #000000;
+    }
+    .m-toast__btn--danger {
+      background: $m-btn-dasy-color-dark-danger;
+      color: #000000;
+    }
+  }
+  .m-toast--success {
+    background: $m-dasy-success-color;
+    .m-toast__view-more {
+      color: $m-success-color-dark;
+    }
+    .m-toast__icon {
+      svg {
+        fill: $m-dasy-success-color;
+      }
+    }
+    .m-toast__close-btn {
+      svg {
+        fill: black;
+      }
+    }
+    .m-toast__btn--success {
+      background: $m-btn-dasy-color-dark-success;
+      color: #000000;
+    }
+    .m-toast__btn--info {
+      background: $m-btn-dasy-color-dark-info;
+      color: #000000;
+    }
+    .m-toast__btn--warning {
+      background: $m-btn-dasy-color-dark-warning;
+      color: #000000;
+    }
+    .m-toast__btn--danger {
+      background: $m-btn-dasy-color-dark-danger;
+      color: #000000;
+    }
+  }
+  .m-toast--info {
+    background: $m-dasy-info-color;
+    .m-toast__view-more {
+      color: $m-info-color-dark;
+    }
+    .m-toast__icon {
+      svg {
+        fill: $m-dasy-info-color;
+      }
+    }
+    .m-toast__close-btn {
+      svg {
+        fill: black;
+      }
+    }
+    .m-toast__btn--success {
+      background: $m-btn-dasy-color-dark-success;
+      color: #000000;
+    }
+    .m-toast__btn--info {
+      background: $m-btn-dasy-color-dark-info;
+      color: #000000;
+    }
+    .m-toast__btn--warning {
+      background: $m-btn-dasy-color-dark-warning;
+      color: #000000;
+    }
+    .m-toast__btn--danger {
+      background: $m-btn-dasy-color-dark-danger;
+      color: #000000;
+    }
+  }
+  .m-toast--warning {
+    background: $m-dasy-warning-color;
+    .m-toast__view-more {
+      color: $m-warning-color-dark;
+    }
+    .m-toast__icon {
+      svg {
+        fill: $m-dasy-warning-color;
+      }
+    }
+    .m-toast__close-btn {
+      svg {
+        fill: black;
+      }
+    }
+    .m-toast__btn--success {
+      background: $m-btn-dasy-color-dark-success;
+      color: #000000;
+    }
+    .m-toast__btn--info {
+      background: $m-btn-dasy-color-dark-info;
+      color: #000000;
+    }
+    .m-toast__btn--warning {
+      background: $m-btn-dasy-color-dark-warning;
+      color: #000000;
+    }
+    .m-toast__btn--danger {
+      background: $m-btn-dasy-color-dark-danger;
+      color: #000000;
+    }
+  }
+  .m-toast--danger {
+    background: $m-dasy-danger-color;
+    .m-toast__view-more {
+      color: $m-danger-color-dark;
+    }
+    .m-toast__icon {
+      svg {
+        fill: $m-dasy-danger-color;
+      }
+    }
+    .m-toast__close-btn {
+      svg {
+        fill: black;
+      }
+    }
+    .m-toast__btn--success {
+      background: $m-btn-dasy-color-dark-success;
+      color: #000000;
+    }
+    .m-toast__btn--info {
+      background: $m-btn-dasy-color-dark-info;
+      color: #000000;
+    }
+    .m-toast__btn--warning {
+      background: $m-btn-dasy-color-dark-warning;
+      color: #000000;
+    }
+    .m-toast__btn--danger {
+      background: $m-btn-dasy-color-dark-danger;
+      color: #000000;
+    }
+  }
+
+  .m-toast__icon {
+    width: 25px;
+    /* height: 50px; */
+    line-height: 10px;
+    border-radius: 100px;
+    background: #000000;
     padding: 2px;
     /* display: block; */
   }

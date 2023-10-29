@@ -30,7 +30,7 @@ export class ToastService {
     const simpleToast = new SimpleToast(
       ToastPosition.RIGHT_TOP,
       '',
-      ToastTypes.DANGER
+      ToastTypes.DANGER,
     );
     simpleToast.timeToDisplay = 6000;
     simpleToast.closeButtonActive = true;
@@ -114,6 +114,7 @@ export class ToastService {
     simpleToast.toastId = this.generateId();
     if (this.toastComponent) {
       this.toastComponent!.instance!.toastPosition = simpleToast.toastPosition;
+      this.toastComponent.instance.theme = simpleToast.theme;
     }
     this.toasts.push(simpleToast);
     if (simpleToast.timeToDisplay && simpleToast.timeToDisplay > 0) {
@@ -128,6 +129,7 @@ export class ToastService {
     actionToast.toastId = this.generateId();
     if (this.toastComponent) {
       this.toastComponent!.instance!.toastPosition = actionToast.toastPosition;
+      this.toastComponent.instance.theme = actionToast.theme;
     }
     this.toasts.push(toast);
     toast.subject = subject;
