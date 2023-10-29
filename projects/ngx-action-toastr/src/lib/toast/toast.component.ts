@@ -37,8 +37,6 @@ export class ToastComponent implements OnInit {
    * @param index item index of the toast
    */
   setTimeOutForAutoDisappear(toast: Toast) {
-    this.theme = toast.theme;
-    this.toastPosition = toast.toastPosition;
     setTimeout(() => {
       const index = this.toastService.toasts.findIndex(
         (data) => data.toastId === toast.toastId
