@@ -46,6 +46,15 @@
                                     [(ngModel)]="options.timeToDisplay" aria-describedby="toastTimeoutHelp" />
                                 <small id="toastTimeoutHelp" class="form-text text-muted">0 never expires</small>
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="theme">
+                                    <strong>Timeout(milliseconds)</strong>
+                                </label>
+                                <select class="form-control" id="theme" [(ngModel)]="options.theme">
+                                    <option [value]="themes.CLASSIC">CLASSIC</option>
+                                    <option [value]="themes.DEFAULT">DEFAULT</option>
+                                </select>
+                            </div>
                             <fieldset class="form-group">
                                 <label>
                                     <strong>Toast Type</strong>
@@ -194,20 +203,48 @@
                             <p class="mb-1">
                                 <small>Toast Simple Controls:</small>
                             </p>
-                            <div class="d-flex justify-content-center">
-                                <button type="button" class="btn success-btn-color btn-block mx-1" (click)="openSuccessToast()">
+                            <div class="d-flex justify-content-center" *ngIf="options.theme === themes.DEFAULT">
+                                <button type="button" class="btn success-btn-color btn-block mx-1"
+                                    (click)="openSuccessToast()">
                                     Success
                                 </button>
-                                <button type="button" class="btn info-btn-color btn-block mx-1" (click)="openInfoToast()">
+                                <button type="button" class="btn info-btn-color btn-block mx-1"
+                                    (click)="openInfoToast()">
                                     Info
                                 </button>
-                                <button type="button" class="btn warning-btn-color btn-block mx-1" (click)="openWarningToast()">
+                                <button type="button" class="btn warning-btn-color btn-block mx-1"
+                                    (click)="openWarningToast()">
                                     Warning
                                 </button>
-                                <button type="button" class="btn danger-btn-color btn-block mx-1" (click)="openDangerToast()">
+                                <button type="button" class="btn danger-btn-color btn-block mx-1"
+                                    (click)="openDangerToast()">
                                     Danger
                                 </button>
-                                <button type="button" class="btn default-btn-color btn-block mx-1" (click)="openDefaultToast()">
+                                <button type="button" class="btn default-btn-color btn-block mx-1"
+                                    (click)="openDefaultToast()">
+                                    Default
+                                </button>
+                            </div>
+
+                            <div class="d-flex justify-content-center" *ngIf="options.theme === themes.CLASSIC  ">
+                                <button type="button" class="btn success-dasy-btn-color btn-block mx-1"
+                                    (click)="openSuccessToast()">
+                                    Success
+                                </button>
+                                <button type="button" class="btn info-dasy-btn-color btn-block mx-1"
+                                    (click)="openInfoToast()">
+                                    Info
+                                </button>
+                                <button type="button" class="btn warning-dasy-btn-color btn-block mx-1"
+                                    (click)="openWarningToast()">
+                                    Warning
+                                </button>
+                                <button type="button" class="btn danger-dasy-btn-color btn-block mx-1"
+                                    (click)="openDangerToast()">
+                                    Danger
+                                </button>
+                                <button type="button" class="btn default-dasy-btn-color btn-block mx-1"
+                                    (click)="openDefaultToast()">
                                     Default
                                 </button>
                             </div>
